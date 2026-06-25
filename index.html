@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- БЛОК ДЛЯ МАССОВОГО КОПИРОВАНИЯ -->
+<title>Казино с кэшбэком и VIP-программой — возврат для крупных игроков</title>
+<meta name="description" content="Где возвращают часть проигрыша и дают VIP-привилегии: размеры кэшбэка, лимиты, уровни программ и реальные условия для хайроллеров.">
+<!-- /БЛОК -->
+
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Казино с кэшбэком и VIP-программой — возврат для крупных игроков">
+<meta property="og:description" content="Где возвращают часть проигрыша и дают VIP-привилегии: размеры кэшбэка, лимиты, уровни программ и реальные условия для хайроллеров.">
+
+<style>
+  /* Палитра доверия: тёмно-синий (надёжность банков/страховых),
+     мягкий голубой фон, зелёный — позитивные сигналы «проверено». */
+  :root{
+    --surface:#ffffff;  /* светлые «парящие» карточки */
+    --line:#e2e8f2;
+    --navy:#14315c;     /* основной — доверие, стабильность */
+    --blue:#2563eb;     /* акцент — ссылки, активные элементы */
+    --blue-soft:#eaf1ff;
+    --green:#0f9d6b;    /* верификация, выгода */
+    --green-soft:#e7f7f0;
+    --txt:#16233a;      /* текст внутри светлых карточек */
+    --muted:#5d6b82;
+    --on:#eef3fb;       /* текст на тёмном фоне */
+    --on-muted:#9fb0cf;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+    background:
+      radial-gradient(900px 460px at 50% -6%, rgba(37,99,235,.30) 0%, rgba(37,99,235,0) 60%),
+      radial-gradient(1100px 700px at 88% 6%, rgba(15,157,107,.14) 0%, rgba(15,157,107,0) 55%),
+      repeating-linear-gradient(135deg, rgba(255,255,255,.018) 0 1px, transparent 1px 24px),
+      linear-gradient(180deg,#0c1a33 0%, #0a1426 100%);
+    background-attachment:fixed;
+    color:var(--on);
+    min-height:100vh;
+    padding-bottom:60px;
+  }
+  .wrap{max-width:1000px;margin:0 auto;padding:0 18px}
+
+  /* HERO */
+  header{text-align:center;padding:64px 18px 40px}
+  .badge{
+    display:inline-flex;align-items:center;gap:7px;font-size:13px;letter-spacing:1px;text-transform:uppercase;
+    color:#34d399;border:1px solid rgba(52,211,153,.4);
+    padding:6px 16px;border-radius:40px;margin-bottom:22px;font-weight:600;
+    background:rgba(15,157,107,.14);backdrop-filter:blur(4px);
+  }
+  h1{
+    font-size:clamp(28px,5vw,46px);line-height:1.15;font-weight:800;
+    background:linear-gradient(90deg,#ffffff 0%,#cfe0ff 60%,#9fc2ff 100%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    text-shadow:0 2px 40px rgba(80,140,255,.18);
+  }
+  header p{color:var(--on-muted);max-width:620px;margin:18px auto 0;font-size:17px;line-height:1.6}
+
+  /* TABLE */
+  .table{
+    margin-top:18px;border:1px solid rgba(255,255,255,.08);border-radius:20px;overflow:hidden;
+    background:var(--surface);
+    box-shadow:0 30px 70px rgba(0,0,0,.5);
+  }
+  .thead{
+    display:grid;grid-template-columns:64px 1fr 1.4fr 140px;gap:10px;align-items:center;
+    padding:16px 20px;font-size:13px;text-transform:uppercase;letter-spacing:.8px;font-weight:600;
+    color:var(--muted);border-bottom:1px solid var(--line);background:#f7faff;
+  }
+  .row{border-bottom:1px solid var(--line)}
+  .row:last-child{border-bottom:none}
+  .rmain{
+    display:grid;grid-template-columns:64px 1fr 1.4fr 140px;gap:10px;align-items:center;
+    padding:18px 20px;transition:background .25s;
+  }
+  .row:hover .rmain{background:#f7faff}
+  .rank{
+    width:42px;height:42px;display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:18px;border-radius:12px;color:#fff;
+    background:linear-gradient(135deg,#1c4585,var(--navy));
+    box-shadow:0 4px 12px rgba(20,49,92,.25);
+  }
+  .row:nth-child(3) .rank{background:linear-gradient(135deg,#3b6fc4,#27508f)}
+  .row:nth-child(4) .rank{background:linear-gradient(135deg,#5f7fa8,#465f80)}
+  .row:nth-child(n+5) .rank{background:linear-gradient(135deg,#7d90ab,#5d6b82)}
+  .cname{font-weight:700;font-size:20px;color:var(--navy)}
+  .cname small{display:block;font-weight:400;font-size:12px;color:var(--muted);margin-top:2px}
+  .bonus{font-weight:700;color:var(--green);font-size:15px;line-height:1.4}
+  .bonus span{display:block;font-weight:400;color:var(--muted);font-size:12px;margin-top:2px}
+  .btn-rev{
+    cursor:pointer;border:none;
+    background:linear-gradient(90deg,#fbc24a 0%,#f5a623 100%);
+    color:#3a2900;padding:12px 8px;border-radius:12px;font-size:14px;font-weight:700;letter-spacing:.3px;
+    width:100%;transition:.2s;display:flex;align-items:center;justify-content:center;gap:6px;
+    box-shadow:0 6px 16px rgba(245,166,35,.38);
+  }
+  .btn-rev:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(245,166,35,.55)}
+  .btn-rev .arr{transition:transform .3s;font-size:11px}
+  .row.open .btn-rev .arr{transform:rotate(180deg)}
+  .row.open .btn-rev{background:linear-gradient(90deg,#eaa92f 0%,#dd9412 100%)}
+
+  /* CASCADE PANEL */
+  .panel{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1)}
+  .row.open .panel{max-height:760px}
+  .row.open{background:#f7faff}
+  .pinner{
+    margin:0 16px 18px;padding:24px;border-radius:16px;
+    display:grid;grid-template-columns:1fr 300px;gap:24px;
+    background:linear-gradient(135deg,#16335f 0%,#0e2244 100%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 14px 30px rgba(0,0,0,.28);
+  }
+  .pdesc h3{font-size:14px;color:#fbc24a;margin-bottom:8px;text-transform:uppercase;letter-spacing:.6px}
+  .pdesc p{color:#c3d0e6;line-height:1.7;font-size:15px}
+  .adv{list-style:none;margin:14px 0 0}
+  .adv li{position:relative;padding:5px 0 5px 26px;color:#e6edf8;font-size:14px}
+  .adv li::before{content:"\2713";position:absolute;left:0;color:#34d399;font-weight:700}
+  .pcta{
+    display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+    border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:24px 18px;
+    background:#fff;box-shadow:0 10px 26px rgba(0,0,0,.22);
+  }
+  .pcta .big{font-size:22px;font-weight:800;color:var(--navy);line-height:1.25}
+  .pcta .sub{color:var(--muted);font-size:13px;margin:8px 0 18px}
+  .go{
+    display:inline-block;text-decoration:none;font-weight:700;font-size:16px;letter-spacing:.4px;
+    color:#fff;padding:14px 38px;border-radius:14px;
+    background:linear-gradient(90deg,var(--green),#0c8a5e);
+    box-shadow:0 8px 22px rgba(15,157,107,.3);transition:.2s;text-transform:uppercase;
+  }
+  .go:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(15,157,107,.42)}
+
+  footer{text-align:center;color:var(--on-muted);font-size:12px;margin-top:48px;padding:0 18px;line-height:1.7}
+  footer .age{display:inline-block;border:2px solid rgba(255,255,255,.4);border-radius:50%;width:34px;height:34px;line-height:30px;font-weight:700;margin-bottom:10px;color:#cfe0ff}
+
+  /* ===== БЛОКИ ПОД ТАБЛИЦЕЙ ===== */
+  .sec{max-width:1000px;margin:54px auto 0;padding:0 18px}
+  .sec h2{font-size:clamp(22px,3.4vw,30px);color:#fff;text-align:center;font-weight:800;margin-bottom:10px}
+  .sec .lead{text-align:center;color:var(--on-muted);max-width:660px;margin:0 auto 30px;line-height:1.6;font-size:16px}
+
+  /* Логотипы лицензиатов */
+  .licenses{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+  .lic{
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    background:var(--surface);border:1px solid var(--line);border-radius:14px;
+    padding:20px 12px;min-height:96px;box-shadow:0 18px 40px rgba(0,0,0,.35);
+  }
+  .lic img{max-width:100%;max-height:46px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.62;transition:.25s}
+  .lic:hover img{filter:grayscale(0);opacity:1}
+  .lic svg{width:100%;height:auto;max-height:58px;opacity:.92;transition:.25s}
+  .lic:hover svg{opacity:1;transform:translateY(-2px)}
+  .lic .ph{font-size:12px;color:#9aa6ba;line-height:1.35}
+
+  /* Карточки доверия */
+  .trust{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+  .tcard{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+  .tcard .ti{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--blue-soft);color:var(--blue);margin-bottom:14px}
+  .tcard h3{color:var(--navy);font-size:17px;margin-bottom:6px}
+  .tcard p{color:var(--muted);font-size:14px;line-height:1.6}
+
+  /* FAQ */
+  .faq{margin-top:8px;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--surface);box-shadow:0 22px 50px rgba(0,0,0,.4)}
+  .qa{border-bottom:1px solid var(--line)}
+  .qa:last-child{border-bottom:none}
+  .qa>button{
+    width:100%;text-align:left;cursor:pointer;border:none;background:none;font-family:inherit;
+    padding:20px 22px;font-size:16px;font-weight:600;color:var(--navy);
+    display:flex;justify-content:space-between;gap:14px;align-items:center;
+  }
+  .qa>button:hover{background:#f7faff}
+  .qa .qi{flex:0 0 auto;width:24px;height:24px;border-radius:50%;border:1px solid #cdd9ec;color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;transition:.3s}
+  .qa.open .qi{transform:rotate(45deg);background:var(--blue);color:#fff;border-color:var(--blue)}
+  .qa .ans{max-height:0;overflow:hidden;transition:max-height .4s ease}
+  .qa.open .ans{max-height:340px}
+  .qa .ans p{padding:0 22px 20px;color:var(--muted);line-height:1.7;font-size:15px}
+
+  @media(max-width:720px){
+    .thead{display:none}
+    .rmain{grid-template-columns:48px 1fr;grid-template-areas:"rank name" "bonus bonus" "btn btn";gap:8px 12px}
+    .rank{grid-area:rank}.cname{grid-area:name}.bonus{grid-area:bonus;padding-top:4px}
+    .btn-rev{grid-area:btn}
+    .pinner{grid-template-columns:1fr;gap:16px}
+    .licenses{grid-template-columns:repeat(2,1fr)}
+    .trust{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<header>
+<div class="badge">Обновлено · 2026</div>
+<h1>Казино с кэшбэком и VIP-программой для хайроллеров</h1>
+</header>
+
+<div class="wrap" style="max-width:800px;padding:0 18px 24px">
+<p style="color:var(--on-muted);font-size:16px;line-height:1.7">Кэшбэк — это возврат части проигранных средств. Вы поставили 100 000 рублей за неделю, проиграли 40 000 — казино возвращает 10% от проигрыша, то есть 4 000 рублей. Не выиграли, но и не потеряли так больно. Для хайроллеров — игроков с крупными ставками — кэшбэк часто важнее приветственного бонуса, потому что бонус разовый, а кэшбэк идёт каждую неделю или месяц.
+
+Виды кэшбэка. Еженедельный — самый распространённый формат: казино считает ваш чистый проигрыш за календарную неделю (с понедельника по воскресенье) и возвращает процент в понедельник. Месячный — реже, но проценты обычно выше (10–15% против 5–10% еженедельного). Дневной — встречается в VIP-программах крупных казино, возврат 3–5% каждый день без задержек.
+
+Размер кэшбэка зависит от VIP-уровня. Базовый уровень — 5–7%, Silver — 8–10%, Gold — 10–12%, Platinum — 12–15%, VIP/Diamond — 15–20%. Чтобы подняться на уровень, нужно набрать определённый объём ставок за период. Уровни не вечные — если вы перестали играть, через месяц-два вас понизят. Активные хайроллеры держат Platinum и выше стабильно.
+
+Вейджер кэшбэка — критический момент. Есть два типа: кэшбэк с вейджером (нужно отыграть возвращённую сумму x3–x10 перед выводом) и кэшбэк без вейджера (деньги приходят на реальный баланс, можно выводить сразу). Второй вариант встречается реже, но он в разы ценнее. Всегда читайте правила — «кэшбэк 15%» с вейджером x10 может быть хуже, чем «кэшбэк 8%» без вейджера.
+
+VIP-программы — это не только кэшбэк. На уровнях Platinum и выше казино дают: персонального менеджера (общение в Telegram или WhatsApp, быстрое решение проблем), повышенные лимиты на вывод (до 500 000–1 000 000 рублей за одну операцию вместо стандартных 50 000), эксклюзивные бонусы (фриспины в новых слотах до релиза, бездепозитные подарки на день рождения), приглашения на офлайн-мероприятия, и ускоренную верификацию (до 1 часа вместо 24).
+
+В нашем рейтинге Riobet лидирует по кэшбэку — еженедельный возврат до 10% без вейджера для активных игроков. Vavada предлагает кэшбэк до 10% в месяц, рассчитывается по итогам календарного месяца. 1WIN не имеет классического кэшбэка, но компенсирует это 500% бонусом на депозит и кэшбек-клубом с уровнями. JoyCasino и Casino-X предлагают VIP-программы с уровнями от Bronze до VIP, где кэшбэк растёт от 5% до 15%.
+
+Для хайроллера главный критерий выбора казино — не размер приветственного бонуса, а условия кэшбэка и скорость вывода крупных сумм. 100 000 рублей бонуса на первый депозит — красиво, но если кэшбэк 3% с вейджером x10, а вывод свыше 50 000 идёт трое суток — вы потеряете больше на ожидании и отсутствии страховки, чем выиграете на стартовом пакете.</p>
+</div>
+
+<div class="table">
+    <div class="thead">
+      <div>#</div><div>Казино</div><div>Основной бонус</div><div style="text-align:center">Обзор</div>
+    </div>
+
+    <!-- ============ 1. VAVADA ============ -->
+    <div class="row" id="vavada">
+      <div class="rmain">
+        <div class="rank">1</div>
+        <div class="cname">Vavada<small>Лидер рейтинга</small></div>
+        <div class="bonus">100 FS без депозита + 100%<span>Вейджер фриспинов x20 · депозит x35</span></div>
+        <button class="btn-rev" onclick="toggle('vavada')">Обзор <span class="arr">▼</span></button>
+      </div>
+      <div class="panel"><div class="pinner">
+        <div class="pdesc">
+          <h3>Коротко о Vavada</h3>
+          <p>Vavada заслуженно открывает рейтинг: площадка делает ставку на мгновенные выплаты и щедрый старт без обязательного депозита. Сразу после подтверждения почты новичок получает 100 фриспинов на слоте Great Pigsby Megaways с мягким вейджером x20, а первый депозит от $1 удваивается на 100%.</p>
+          <ul class="adv">
+            <li>100 фриспинов без депозита за регистрацию</li>
+            <li>Низкий вейджер фриспинов x20, депозитный — x35</li>
+            <li>Ежемесячный кэшбэк до 10% от проигрышей</li>
+          </ul>
+        </div>
+        <div class="pcta">
+          <div class="big">100 FS + 100%</div>
+          <div class="sub">Фриспины без депозита</div>
+          <a class="go" href="https://imgevil.com/sh/vavada" target="_blank" rel="sponsored nofollow noopener">Перейти</a>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- ============ 2. 1WIN ============ -->
+    <div class="row" id="onewin">
+      <div class="rmain">
+        <div class="rank">2</div>
+        <div class="cname">1WIN<small>Максимальный пакет</small></div>
+        <div class="bonus">500% на 4 депозита<span>До 200 000 ₽ + фриспины</span></div>
+        <button class="btn-rev" onclick="toggle('onewin')">Обзор <span class="arr">▼</span></button>
+      </div>
+      <div class="panel"><div class="pinner">
+        <div class="pdesc">
+          <h3>Коротко о 1WIN</h3>
+          <p>1WIN привлекает игроков самым объёмным приветственным пакетом в подборке. Бонус распределяется на четыре первых пополнения по схеме 200% + 150% + 100% + 50% и суммарно достигает 500%, до 200 000 ₽. Площадка совмещает казино и ставки на спорт в одном кабинете.</p>
+          <ul class="adv">
+            <li>Суммарно 500% на первые четыре депозита</li>
+            <li>Казино и беттинг в едином аккаунте</li>
+            <li>Регулярные турниры и фриспины по промокодам</li>
+          </ul>
+        </div>
+        <div class="pcta">
+          <div class="big">500%</div>
+          <div class="sub">Пакет до 200 000 ₽</div>
+          <a class="go" href="https://imgevil.com/sh/1win" target="_blank" rel="sponsored nofollow noopener">Перейти</a>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- ============ 3. RIOBET ============ -->
+    <div class="row" id="riobet">
+      <div class="rmain">
+        <div class="rank">3</div>
+        <div class="cname">Riobet<small>Кэшбэк каждую неделю</small></div>
+        <div class="bonus">225% до $2250 + 70 FS<span>По промокоду RIOFW · вейджер x35</span></div>
+        <button class="btn-rev" onclick="toggle('riobet')">Обзор <span class="arr">▼</span></button>
+      </div>
+      <div class="panel"><div class="pinner">
+        <div class="pdesc">
+          <h3>Коротко о Riobet</h3>
+          <p>Riobet ценят за заботу о постоянных игроках: приветственный пакет увеличивает первый депозит на 225% (до $2250) и добавляет 70 фриспинов на Book of Dead по промокоду RIOFW. Минимальный депозит для активации — $10, вейджер x35, а постоянным игрокам площадка возвращает часть проигрышей кэшбэком.</p>
+          <ul class="adv">
+            <li>Повышенный процент 225% на первый депозит</li>
+            <li>70 фриспинов на популярный Book of Dead</li>
+            <li>Регулярный кэшбэк и продуманная VIP-программа</li>
+          </ul>
+        </div>
+        <div class="pcta">
+          <div class="big">225% + 70 FS</div>
+          <div class="sub">Старт до $2250</div>
+          <a class="go" href="https://imgevil.com/sh/riobet" target="_blank" rel="sponsored nofollow noopener">Перейти</a>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- ============ 4. JOYCASINO ============ -->
+    <div class="row" id="joycasino">
+      <div class="rmain">
+        <div class="rank">4</div>
+        <div class="cname">JoyCasino<small>Низкий вейджер</small></div>
+        <div class="bonus">до 200% + 200 FS<span>Отыгрыш всего x25</span></div>
+        <button class="btn-rev" onclick="toggle('joycasino')">Обзор <span class="arr">▼</span></button>
+      </div>
+      <div class="panel"><div class="pinner">
+        <div class="pdesc">
+          <h3>Коротко о JoyCasino</h3>
+          <p>JoyCasino делает упор на честные и выполнимые условия. Приветственный пакет даёт до 200% к депозиту и 200 фриспинов (по 20 в день в течение 10 дней) на слоте The Dog House, а отыгрыш составляет демократичные x25. Минимальный депозит для старта — всего 500 ₽.</p>
+          <ul class="adv">
+            <li>Мягкий вейджер x25 — бонус реально отыграть</li>
+            <li>200 фриспинов с растянутой выдачей на 10 дней</li>
+            <li>Дополнительные ваучеры на live-рулетку</li>
+          </ul>
+        </div>
+        <div class="pcta">
+          <div class="big">200% + 200 FS</div>
+          <div class="sub">Вейджер x25</div>
+          <a class="go" href="https://imgevil.com/sh/joycasino" target="_blank" rel="sponsored nofollow noopener">Перейти</a>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- ============ 5. CASINO-X ============ -->
+    <div class="row" id="casinox">
+      <div class="rmain">
+        <div class="rank">5</div>
+        <div class="cname">Casino-X<small>Гибкий процент бонуса</small></div>
+        <div class="bonus">100–200% + 200 FS<span>Вейджер x30 · мин. депозит 1200 ₽</span></div>
+        <button class="btn-rev" onclick="toggle('casinox')">Обзор <span class="arr">▼</span></button>
+      </div>
+      <div class="panel"><div class="pinner">
+        <div class="pdesc">
+          <h3>Коротко о Casino-X</h3>
+          <p>Casino-X даёт гибкий процент за первый депозит: 100%, 150% или 200% в зависимости от суммы взноса, плюс 200 фриспинов, которые выдаются поэтапно в течение 10 дней. Минимальный депозит для активации — 1200 ₽ (или $/€20), отыгрыш бонуса — x30.</p>
+          <ul class="adv">
+            <li>Процент бонуса растёт вместе с депозитом — до 200%</li>
+            <li>200 фриспинов с поэтапной выдачей на 10 дней</li>
+            <li>Дополнительные эксклюзивные спины по промокоду</li>
+          </ul>
+        </div>
+        <div class="pcta">
+          <div class="big">до 200% + 200 FS</div>
+          <div class="sub">Вейджер x30 · от 1200 ₽</div>
+          <a class="go" href="https://imgevil.com/sh/casinox" target="_blank" rel="sponsored nofollow noopener">Перейти</a>
+        </div>
+      </div></div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ===== ЛИЦЕНЗИАТЫ ===== -->
+
+<div class="wrap" style="max-width:800px;padding:24px 18px">
+<h2 style="font-size:22px;color:#fff;margin-bottom:16px">Частые вопросы о кэшбэке и VIP-программах</h2>
+<div class="faq">
+<div class="qa">
+<details><summary style="cursor:pointer;padding:12px 0;font-size:16px;color:#fff">Кэшбэк начисляется от проигрыша или от суммы ставок?</summary>
+<div class="ans"><p style="color:var(--on-muted);padding:8px 0;line-height:1.6">От чистого проигрыша. Формула: сумма ставок минус сумма выигрышей за период. Если вы поставили 100 000 и выиграли 80 000 — чистый проигрыш 20 000, кэшбэк 10% = 2 000 рублей. Если вы в плюсе — кэшбэк не начисляется.</p></div>
+</details>
+</div>
+<div class="qa">
+<details><summary style="cursor:pointer;padding:12px 0;font-size:16px;color:#fff">Нужно ли отыгрывать кэшбэк?</summary>
+<div class="ans"><p style="color:var(--on-muted);padding:8px 0;line-height:1.6">Зависит от казино. Кэшбэк без вейджера (Riobet, Vavada) — деньги приходят на реальный баланс, выводите сразу. Кэшбэк с вейджером (большинство казино) — нужно сделать ставок на сумму, кратную кэшбэку (x3–x10), прежде чем выводить. Всегда читайте правила перед активацией.</p></div>
+</details>
+</div>
+<div class="qa">
+<details><summary style="cursor:pointer;padding:12px 0;font-size:16px;color:#fff">Как подняться на VIP-уровень в казино?</summary>
+<div class="ans"><p style="color:var(--on-muted);padding:8px 0;line-height:1.6">Набирайте оборот ставок. Каждый уровень требует определённой суммы ставок за месяц: Silver — 100 000–300 000 рублей, Gold — 300 000–700 000, Platinum — 700 000–1 500 000, VIP — от 1 500 000. Точные пороги зависят от казино. Уровень пересматривается ежемесячно.</p></div>
+</details>
+</div>
+<div class="qa">
+<details><summary style="cursor:pointer;padding:12px 0;font-size:16px;color:#fff">Что лучше: высокий кэшбэк с вейджером или низкий без вейджера?</summary>
+<div class="ans"><p style="color:var(--on-muted);padding:8px 0;line-height:1.6">Низкий без вейджера почти всегда выгоднее. 5% без вейджера = реальные деньги на счёте. 15% с вейджером x10 = нужно прокрутить сумму кэшбэка 10 раз, и шанс вывести — около 20%. Считайте не процент, а ожидаемую сумму на руках.</p></div>
+</details>
+</div>
+<div class="qa">
+<details><summary style="cursor:pointer;padding:12px 0;font-size:16px;color:#fff">Можно ли получить персонального менеджера без VIP-уровня?</summary>
+<div class="ans"><p style="color:var(--on-muted);padding:8px 0;line-height:1.6">В большинстве казино — нет. Но если вы делаете крупные депозиты (от 50 000 за раз) и регулярно играете — напишите в поддержку с просьбой о персональном менеджере. Часто казино идут навстречу перспективным игрокам до того, как они наберут официальный оборот для VIP.</p></div>
+</details>
+</div>
+<div class="qa">
+<details><summary style="cursor:pointer;padding:12px 0;font-size:16px;color:#fff">Возвращают ли казино проигрыш хайроллерам при крупных проигрышах?</summary>
+<div class="ans"><p style="color:var(--on-muted);padding:8px 0;line-height:1.6">Кэшбэк — это и есть частичный возврат. Полный возврат не практикуется, но VIP-менеджеры могут предложить компенсацию: бездепозитный бонус, фриспины или повышенный кэшбэк на следующий месяц. Чем выше ваш уровень — тем гибче условия. Но рассчитывать на полный возврат не стоит — казино тоже должно зарабатывать.</p></div>
+</details>
+</div>
+</div>
+</div>
+
+<div class="cross-links" style="max-width:1000px;margin:40px auto 0;padding:24px 18px;border-top:1px solid rgba(255,255,255,0.1)">
+<h2 style="font-size:20px;color:#fff;margin-bottom:16px">Полезные материалы</h2>
+<ul style="list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">
+<li style="padding:12px 16px;background:rgba(255,255,255,0.05);border-radius:8px"><a href="https://radarcasino.online/" style="color:#34d399;text-decoration:none;font-size:15px">рейтинг онлайн-казино 2026</a></li>
+<li style="padding:12px 16px;background:rgba(255,255,255,0.05);border-radius:8px"><a href="https://search.radarcasino.online/" style="color:#34d399;text-decoration:none;font-size:15px">что такое вейджер в казино</a></li>
+<li style="padding:12px 16px;background:rgba(255,255,255,0.05);border-radius:8px"><a href="https://vavada.radarcasino.online/" style="color:#34d399;text-decoration:none;font-size:15px">казино для новичков</a></li>
+<li style="padding:12px 16px;background:rgba(255,255,255,0.05);border-radius:8px"><a href="https://joy.radarcasino.online/" style="color:#34d399;text-decoration:none;font-size:15px">слоты с высокой отдачей (RTP)</a></li>
+<li style="padding:12px 16px;background:rgba(255,255,255,0.05);border-radius:8px"><a href="https://riobet.radarcasino.online/" style="color:#34d399;text-decoration:none;font-size:15px">криптоказино 2026</a></li>
+<li style="padding:12px 16px;background:rgba(255,255,255,0.05);border-radius:8px"><a href="https://bonus.radarcasino.online/" style="color:#34d399;text-decoration:none;font-size:15px">бонус без депозита и фриспины</a></li>
+<li style="padding:12px 16px;background:rgba(255,255,255,0.05);border-radius:8px"><a href="https://fast.radarcasino.online/" style="color:#34d399;text-decoration:none;font-size:15px">казино с быстрым выводом</a></li>
+<li style="padding:12px 16px;background:rgba(255,255,255,0.05);border-radius:8px"><a href="https://mobile.radarcasino.online/" style="color:#34d399;text-decoration:none;font-size:15px">мобильные казино</a></li>
+<li style="padding:12px 16px;background:rgba(255,255,255,0.05);border-radius:8px"><a href="https://license.radarcasino.online/" style="color:#34d399;text-decoration:none;font-size:15px">лицензионные казино</a></li>
+</ul>
+</div>
+
+<div class="wrap">
+<footer>
+<div class="age">18+</div><br>
+<p style="color:var(--on-muted);font-size:13px">Азартные игры предназначены только для лиц старше 18 лет. Играйте ответственно.</p>
+</footer>
+</div>
+
+<script>
+  function toggle(id){
+    var row=document.getElementById(id);
+    var wasOpen=row.classList.contains('open');
+    document.querySelectorAll('.row.open').forEach(function(r){ if(r!==row) r.classList.remove('open'); });
+    row.classList.toggle('open', !wasOpen);
+  }
+  function toggleFaq(btn){
+    btn.parentNode.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
